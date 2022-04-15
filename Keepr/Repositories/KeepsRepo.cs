@@ -40,6 +40,12 @@ namespace Keepr.Repositories
       keeps
       WHERE
       id = @id;
+      UPDATE
+      keeps
+      SET
+      views = views + 1
+      WHERE
+      id = @id;
       ";
       return _db.Query<Keep>(sql, new { id }).FirstOrDefault();
     }
@@ -48,11 +54,17 @@ namespace Keepr.Repositories
     {
       string sql = @"
       SELECT 
-      *
+      k.*,
+      a.*
       FROM 
-      keeps;
+      keeps k
+      JOIN accounts a ON k.creatorId = a.id;
       ";
-      return _db.Query<Keep>(sql).ToList();
+      return _db.Query<Keep, Profile, Keep>(sql, (k, a) =>
+      {
+        k.Creator = a;
+        return k;
+      }).ToList();
     }
 
     internal Keep UpdateKeep(Keep original)
@@ -62,7 +74,8 @@ namespace Keepr.Repositories
       SET
       name = @Name,
       description = @Description,
-      img = @Img
+      img = @Img,
+      views = @Views
       WHERE
       id = @id;
       ";
@@ -74,22 +87,6 @@ namespace Keepr.Repositories
       throw new Exception("Sql Error on UpdateKeep - Repo Layer");
     }
 
-    internal Keep IncreaseKeepViews(Keep original)
-    {
-      string sql = @"
-      UPDATE keeps
-      SET
-      views = @Views
-      WHERE
-      id = @id
-      ";
-      int rowsAffected = _db.Execute(sql, original);
-      if (rowsAffected > 0)
-      {
-        return original;
-      }
-      throw new Exception("Sql Error on IncreaseKeepViews - Repo Layer");
-    }
 
     internal ActionResult<string> RemoveKeep(int id)
     {

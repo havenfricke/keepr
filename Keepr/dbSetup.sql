@@ -39,3 +39,26 @@ CREATE TABLE IF NOT EXISTS vaultkeeps(
   FOREIGN KEY (vaultId) REFERENCES vaults(id) ON DELETE CASCADE,
   FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
+INSERT INTO
+  keeps (name, description, img, views, kept, creatorId)
+VALUES
+  (
+    'Thing',
+    'This is a test thing',
+    'https://thiscatdoesnotexist.com',
+    0,
+    0,
+    '6238c27e986c5f4f83aa4099'
+  );
+SELECT
+  LAST_INSERT_ID();
+SELECT
+  *
+FROM
+  keeps;
+UPDATE
+  keeps
+SET
+  views = views + 1
+WHERE
+  id = 19;

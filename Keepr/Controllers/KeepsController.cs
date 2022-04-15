@@ -54,12 +54,14 @@ namespace Keepr.Controllers
     }
 
     [HttpGet("{id}")]
-
-    public ActionResult<Keep> GetKeepById(int id)
+    [Authorize]
+    public async Task<ActionResult<Keep>> GetKeepById(int id)
     {
       try
       {
+        Account user = await HttpContext.GetUserInfoAsync<Account>();
         Keep keep = _ks.GetKeepById(id);
+        keep.Creator = user;
         return keep;
       }
       catch (System.Exception e)
@@ -88,21 +90,7 @@ namespace Keepr.Controllers
       }
     }
 
-    [HttpPut("{id}")]
 
-    public ActionResult<Keep> IncreaseKeepViews(Keep updateData, int id)
-    {
-      try
-      {
-        Keep keep = _ks.IncreaseKeepViews(updateData, id);
-        return keep;
-      }
-      catch (System.Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-
-    }
 
     [HttpDelete("{id}")]
     [Authorize]

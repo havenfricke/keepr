@@ -49,12 +49,7 @@ namespace Keepr.Services
       return _kr.UpdateKeep(original);
     }
 
-    internal Keep IncreaseKeepViews(Keep updateData, int id)
-    {
-      Keep original = GetKeepById(id);
-      original.Views = (updateData.Views++);
-      return _kr.IncreaseKeepViews(original);
-    }
+
     internal ActionResult<string> RemoveKeep(int id, string userId)
     {
       Keep keep = _kr.GetKeepById(id);
