@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using Keepr.Models;
 using CodeWorks.Auth0Provider;
+using System.Collections.Generic;
 
 namespace Keepr.Controllers
 {
@@ -35,7 +36,88 @@ namespace Keepr.Controllers
       {
         return BadRequest(e.Message);
       }
+    }
 
+    [HttpGet]
+
+    public ActionResult<List<Keep>> GetAllKeeps()
+    {
+      try
+      {
+        List<Keep> keeps = _ks.GetAllKeeps();
+        return keeps;
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpGet("{id}")]
+
+    public ActionResult<Keep> GetKeepById(int id)
+    {
+      try
+      {
+        Keep keep = _ks.GetKeepById(id);
+        return keep;
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpPut("{id}")]
+    [Authorize]
+
+    public async Task<ActionResult<Keep>> UpdateKeep([FromBody] Keep updateData, int id)
+    {
+      try
+      {
+        Account user = await HttpContext.GetUserInfoAsync<Account>();
+        updateData.Id = id;
+        updateData.CreatorId = user.Id;
+        Keep keep = _ks.UpdateKeep(updateData);
+        updateData.Creator = user;
+        return updateData;
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpPut("{id}")]
+
+    public ActionResult<Keep> IncreaseKeepViews(Keep updateData, int id)
+    {
+      try
+      {
+        Keep keep = _ks.IncreaseKeepViews(updateData, id);
+        return keep;
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize]
+
+    public async Task<ActionResult<string>> RemoveKeep(int id)
+    {
+      try
+      {
+        Account user = await HttpContext.GetUserInfoAsync<Account>();
+        return _ks.RemoveKeep(id, user.Id);
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
     }
   }
 }
