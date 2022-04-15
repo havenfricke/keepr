@@ -41,8 +41,8 @@ namespace Keepr
       services.AddScoped<ProfilesService>();
       services.AddScoped<VaultsRepo>();
       services.AddScoped<VaultsService>();
-      services.AddScoped<VaultKeepsRepo>();
-      services.AddScoped<VaultKeepsService>();
+      services.AddScoped<KeepVaultsRepo>();
+      services.AddScoped<KeepVaultsService>();
     }
 
     private void ConfigureCors(IServiceCollection services)
@@ -51,14 +51,14 @@ namespace Keepr
       {
         options.AddPolicy("CorsDevPolicy", builder =>
               {
-            builder
-                  .AllowAnyMethod()
-                  .AllowAnyHeader()
-                  .AllowCredentials()
-                  .WithOrigins(new string[]{
+                builder
+                      .AllowAnyMethod()
+                      .AllowAnyHeader()
+                      .AllowCredentials()
+                      .WithOrigins(new string[]{
                         "http://localhost:8080", "http://localhost:8081"
+                  });
               });
-          });
       });
     }
 

@@ -2,11 +2,11 @@ using System.Data;
 
 namespace Keepr.Repositories
 {
-  public class VaultKeepsRepo
+  public class KeepVaultsRepo
   {
     private readonly IDbConnection _db;
 
-    public VaultKeepsRepo(IDbConnection db)
+    public KeepVaultsRepo(IDbConnection db)
     {
       _db = db;
     }
