@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
 
@@ -36,5 +38,10 @@ namespace Keepr.Services
             original.Picture = editData.Picture.Length > 0 ? editData.Picture : original.Picture;
             return _repo.Edit(original);
         }
+
+    internal List<Vault> GetMyVaults(string id)
+    {
+      return _repo.GetMyVaults(id);
     }
+  }
 }

@@ -105,3 +105,9 @@ FROM
   accounts
 WHERE
   id = '6238c27e986c5f4f83aa4099';
+SELECT
+  *
+FROM
+  keeps
+WHERE
+  creatorId = '6238c27e986c5f4f83aa4099';
