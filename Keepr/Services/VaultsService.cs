@@ -1,6 +1,7 @@
 using System;
 using Keepr.Models;
 using Keepr.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Services
 {
@@ -15,12 +16,45 @@ namespace Keepr.Services
 
     internal Vault CreateVault(Vault vaultData)
     {
-      throw new NotImplementedException();
+      return _vr.CreateVault(vaultData);
     }
 
     internal Vault GetVaultById(int id)
     {
-      throw new NotImplementedException();
+      Vault found = _vr.GetVaultById(id);
+      if (found.IsPrivate != false)
+      {
+        throw new Exception("This Vault is private");
+      }
+      else if (found == null)
+      {
+        throw new Exception("No Vault by that id");
+      }
+      return found;
+    }
+
+    internal Vault UpdateVault(Vault updateData)
+    {
+      Vault original = GetVaultById(updateData.Id);
+      if (updateData.CreatorId != original.CreatorId)
+      {
+        throw new Exception("Not your vault to edit");
+      }
+
+      original.Name = updateData.Name ?? original.Name;
+      original.Description = updateData.Description ?? original.Description;
+      original.IsPrivate = updateData.IsPrivate;
+      return _vr.UpdateVault(original);
+    }
+
+    internal ActionResult<string> RemoveVault(string userId, int id)
+    {
+      Vault vault = _vr.GetVaultById(id);
+      if (userId != vault.CreatorId)
+      {
+        throw new Exception("Not yours to delete");
+      }
+      return _vr.RemoveVault(id);
     }
   }
 }

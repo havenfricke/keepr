@@ -45,7 +45,7 @@ namespace Keepr.Controllers
       try
       {
         List<Keep> keeps = _ks.GetAllKeeps();
-        return keeps;
+        return Ok(keeps);
       }
       catch (System.Exception e)
       {
@@ -60,7 +60,7 @@ namespace Keepr.Controllers
       try
       {
         Keep keep = _ks.GetKeepById(id);
-        return keep;
+        return Ok(keep);
       }
       catch (System.Exception e)
       {
@@ -80,7 +80,7 @@ namespace Keepr.Controllers
         updateData.CreatorId = user.Id;
         Keep keep = _ks.UpdateKeep(updateData);
         updateData.Creator = user;
-        return updateData;
+        return Ok(keep);
       }
       catch (System.Exception e)
       {
