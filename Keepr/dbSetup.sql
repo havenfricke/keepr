@@ -78,3 +78,30 @@ FROM
   JOIN keeps k ON k.id = kv.id
 WHERE
   kv.vaultId = 1;
+SELECT
+  kv.*,
+  kv.vaultId AS VaultKeepId,
+  k.*,
+  a.*
+FROM
+  vaultkeeps kv
+  JOIN keeps k ON k.id = kv.keepId
+  JOIN accounts a ON k.creatorId = a.id
+WHERE
+  kv.vaultId = 75;
+SELECT
+  *
+FROM
+  vaultkeeps
+WHERE
+  id = 3;
+SELECT
+  *
+FROM
+  vaultkeeps;
+SELECT
+  *
+FROM
+  accounts
+WHERE
+  id = '6238c27e986c5f4f83aa4099';

@@ -41,8 +41,8 @@ namespace Keepr
       services.AddTransient<ProfilesService>();
       services.AddTransient<VaultsRepo>();
       services.AddTransient<VaultsService>();
-      services.AddTransient<KeepVaultsRepo>();
-      services.AddTransient<KeepVaultsService>();
+      services.AddTransient<VaultKeepsRepo>();
+      services.AddTransient<VaultKeepsService>();
     }
 
     private void ConfigureCors(IServiceCollection services)

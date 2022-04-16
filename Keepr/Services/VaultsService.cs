@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Security.Authentication;
 using Keepr.Models;
 using Keepr.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -24,9 +23,9 @@ namespace Keepr.Services
     internal Vault GetVaultById(int id)
     {
       Vault found = _vr.GetVaultById(id);
-      if (found.IsPrivate != false)
+      if (found.IsPrivate == true)
       {
-        throw new AuthenticationException("This Vault is private");
+        throw new Exception("This Vault is private");
       }
       else if (found == null)
       {
@@ -61,6 +60,7 @@ namespace Keepr.Services
 
     internal List<KeepVM> GetAllKV(int id)
     {
+
       return _vr.GetKeepsByVaultId(id);
     }
   }

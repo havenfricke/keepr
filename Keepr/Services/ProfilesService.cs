@@ -1,3 +1,4 @@
+using Keepr.Models;
 using Keepr.Repositories;
 
 namespace Keepr.Services
@@ -9,6 +10,11 @@ namespace Keepr.Services
     public ProfilesService(ProfilesRepo pr)
     {
       _pr = pr;
+    }
+
+    internal Profile GetProfileById(string id)
+    {
+      return _pr.GetProfileById(id);
     }
   }
 }

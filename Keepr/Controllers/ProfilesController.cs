@@ -1,3 +1,4 @@
+using Keepr.Models;
 using Keepr.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,21 @@ namespace Keepr.Controllers
     public ProfilesController(ProfilesService ps)
     {
       _ps = ps;
+    }
+
+    [HttpGet("{id}")]
+
+    public ActionResult<Profile> GetProfileById(string id)
+    {
+      try
+      {
+        Profile profile = _ps.GetProfileById(id);
+        return Ok(profile);
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
     }
   }
 }
