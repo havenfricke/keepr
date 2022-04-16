@@ -54,14 +54,12 @@ namespace Keepr.Controllers
     }
 
     [HttpGet("{id}")]
-    [Authorize]
-    public async Task<ActionResult<Keep>> GetKeepById(int id)
+
+    public ActionResult<Keep> GetKeepById(int id)
     {
       try
       {
-        Account user = await HttpContext.GetUserInfoAsync<Account>();
         Keep keep = _ks.GetKeepById(id);
-        keep.Creator = user;
         return keep;
       }
       catch (System.Exception e)

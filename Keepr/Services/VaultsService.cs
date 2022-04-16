@@ -1,3 +1,5 @@
+using System;
+using Keepr.Models;
 using Keepr.Repositories;
 
 namespace Keepr.Services
@@ -9,6 +11,16 @@ namespace Keepr.Services
     public VaultsService(VaultsRepo vr)
     {
       _vr = vr;
+    }
+
+    internal Vault CreateVault(Vault vaultData)
+    {
+      throw new NotImplementedException();
+    }
+
+    internal Vault GetVaultById(int id)
+    {
+      throw new NotImplementedException();
     }
   }
 }

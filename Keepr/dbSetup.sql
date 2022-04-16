@@ -62,3 +62,11 @@ SET
   views = views + 1
 WHERE
   id = 19;
+SELECT
+  k.*,
+  a.*
+FROM
+  keeps k
+  JOIN accounts a ON k.creatorId = a.id
+WHERE
+  k.id = 19;

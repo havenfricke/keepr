@@ -35,11 +35,13 @@ namespace Keepr.Repositories
     {
       string sql = @"
       SELECT
-      *
+      k.*,
+      a.*
       FROM
-      keeps
+      keeps k
+      JOIN accounts a ON k.creatorId = a.id
       WHERE
-      id = @id;
+      k.id = @id;
       UPDATE
       keeps
       SET
@@ -47,7 +49,11 @@ namespace Keepr.Repositories
       WHERE
       id = @id;
       ";
-      return _db.Query<Keep>(sql, new { id }).FirstOrDefault();
+      return _db.Query<Keep, Profile, Keep>(sql, (k, a) =>
+      {
+        k.Creator = a;
+        return k;
+      }, new { id }).FirstOrDefault();
     }
 
     internal List<Keep> GetAllKeeps()
