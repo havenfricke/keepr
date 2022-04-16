@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Dapper;
@@ -84,6 +85,20 @@ namespace Keepr.Repositories
         return "Vault Removed";
       }
       throw new Exception("Sql Error on RemoveVault - Repo Layer");
+    }
+
+    internal List<KeepVM> GetKeepsByVaultId(int vaultId)
+    {
+      string sql = @"
+       SELECT
+        kv.*,
+        k.*
+       FROM vaultkeeps kv
+       JOIN keeps k ON k.id = kv.keepId
+       WHERE
+        kv.vaultId = @vaultId;
+      ";
+      return _db.Query<KeepVM>(sql, new { vaultId }).ToList();
     }
   }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Security.Authentication;
 using Keepr.Models;
 using Keepr.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +26,7 @@ namespace Keepr.Services
       Vault found = _vr.GetVaultById(id);
       if (found.IsPrivate != false)
       {
-        throw new Exception("This Vault is private");
+        throw new AuthenticationException("This Vault is private");
       }
       else if (found == null)
       {
@@ -55,6 +57,11 @@ namespace Keepr.Services
         throw new Exception("Not yours to delete");
       }
       return _vr.RemoveVault(id);
+    }
+
+    internal List<KeepVM> GetAllKV(int id)
+    {
+      return _vr.GetKeepsByVaultId(id);
     }
   }
 }

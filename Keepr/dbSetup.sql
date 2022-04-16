@@ -70,3 +70,11 @@ FROM
   JOIN accounts a ON k.creatorId = a.id
 WHERE
   k.id = 19;
+SELECT
+  kv.*,
+  k.*
+FROM
+  vaultkeeps kv
+  JOIN keeps k ON k.id = kv.id
+WHERE
+  kv.vaultId = 1;
