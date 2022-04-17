@@ -7,14 +7,14 @@
     aria-hidden="true"
   >
     <div class="modal-dialog-md modal-dialog-centered">
-      <div class="modal-content">
+      <div class="modal-content bg-light">
         <div class="modal-header">
           <h5 class="modal-title" id="myModalLabel">
             <slot name="title"><!--title slot--></slot>
           </h5>
           <button
             type="button"
-            class="btn-close bg-light"
+            class="btn-close bg-danger"
             data-bs-dismiss="modal"
             aria-label="Close"
           ></button>
