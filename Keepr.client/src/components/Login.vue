@@ -1,7 +1,7 @@
 <template>
   <span class="navbar-text">
     <button
-      class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0"
+      class="btn text-white text-center lighten-30 text-uppercase my-2 my-lg-0"
       @click="login"
       v-if="!user.isAuthenticated"
     >
@@ -22,7 +22,7 @@
             height="40"
             class="rounded"
           />
-          <span class="mx-3 text-success lighten-30">{{ account.name }}</span>
+          <span class="mx-3 text-white lighten-30">{{ account.name }}</span>
         </div>
       </div>
       <div
@@ -31,7 +31,7 @@
       >
         <router-link :to="{ name: 'Account' }">
           <div class="list-group-item list-group-item-action hoverable">
-            Manage Account
+            My Account
           </div>
         </router-link>
         <div
@@ -39,7 +39,7 @@
           @click="logout"
         >
           <i class="mdi mdi-logout"></i>
-          logout
+          Logout
         </div>
       </div>
     </div>

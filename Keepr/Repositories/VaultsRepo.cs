@@ -111,7 +111,6 @@ namespace Keepr.Repositories
         kv.Description = k.Description;
         return kv;
       }, new { vaultId }).ToList();
-
     }
   }
 }
