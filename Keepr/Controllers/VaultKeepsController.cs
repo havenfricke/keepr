@@ -28,7 +28,7 @@ namespace Keepr.Controllers
       {
         Account user = await HttpContext.GetUserInfoAsync<Account>();
         data.CreatorId = user.Id;
-        VaultKeep keepVault = _vks.CreateKV(data);
+        VaultKeep keepVault = _vks.CreateKV(data, user.Id);
         return Created($"api/vaultkeeps/{keepVault.Id}", keepVault);
       }
       catch (System.Exception e)

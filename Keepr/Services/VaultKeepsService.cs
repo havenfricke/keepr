@@ -8,14 +8,21 @@ namespace Keepr.Services
   public class VaultKeepsService
   {
     private readonly VaultKeepsRepo _vkr;
+    private readonly VaultsService _vs;
 
-    public VaultKeepsService(VaultKeepsRepo kvr)
+    public VaultKeepsService(VaultKeepsRepo kvr, VaultsService vs)
     {
       _vkr = kvr;
+      _vs = vs;
     }
 
-    internal VaultKeep CreateKV(VaultKeep data)
+    internal VaultKeep CreateKV(VaultKeep data, string userId)
     {
+      Vault found = _vs.GetVaultById(data.VaultId);
+      if (found.CreatorId != userId)
+      {
+        throw new Exception("Not your vault");
+      }
       return _vkr.CreateKV(data);
     }
 

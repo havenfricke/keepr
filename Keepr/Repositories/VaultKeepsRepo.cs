@@ -27,7 +27,7 @@ namespace Keepr.Repositories
       UPDATE
       keeps
       SET
-      kept = kept + 1;
+      kept = kept + 1
       WHERE
       id = @keepId;
       ";

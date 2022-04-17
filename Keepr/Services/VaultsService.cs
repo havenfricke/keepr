@@ -23,11 +23,8 @@ namespace Keepr.Services
     internal Vault GetVaultById(int id)
     {
       Vault found = _vr.GetVaultById(id);
-      if (found.IsPrivate == true)
-      {
-        throw new Exception("This Vault is private");
-      }
-      else if (found == null)
+      //TODO write a check for private vaults
+      if (found == null)
       {
         throw new Exception("No Vault by that id");
       }
@@ -60,7 +57,11 @@ namespace Keepr.Services
 
     internal List<KeepVM> GetAllKV(int id)
     {
-
+      Vault found = this.GetVaultById(id);
+      if (found.IsPrivate == true)
+      {
+        throw new Exception("This vault is private");
+      }
       return _vr.GetKeepsByVaultId(id);
     }
   }

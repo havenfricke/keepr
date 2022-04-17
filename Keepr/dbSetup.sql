@@ -111,3 +111,9 @@ FROM
   keeps
 WHERE
   creatorId = '6238c27e986c5f4f83aa4099';
+UPDATE
+  keeps
+SET
+  kept = kept + 1;
+WHERE
+  id = 75;
