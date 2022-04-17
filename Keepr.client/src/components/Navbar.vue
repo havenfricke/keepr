@@ -70,4 +70,7 @@ a:hover {
   transform: scale(0.98);
   transition: 50ms ease-in-out;
 }
+body {
+  overflow-x: hidden;
+}
 </style>
