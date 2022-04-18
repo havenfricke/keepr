@@ -14,7 +14,7 @@
           </h5>
           <button
             type="button"
-            class="btn-close bg-light"
+            class="btn-close bg-danger"
             data-bs-dismiss="modal"
             aria-label="Close"
           ></button>
