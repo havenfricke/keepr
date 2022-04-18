@@ -136,3 +136,10 @@ FROM
   vaultkeeps
 WHERE
   id = 21;
+SELECT
+  *
+FROM
+  vaults
+WHERE
+  creatorId = @id
+  AND isPrivate != false;
