@@ -1,64 +1,5 @@
 <template>
   <div class="container-fluid">
-    <div>
-      <Modal id="myModal">
-        <template #body>
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-6 d-flex justify-content-center">
-                <img
-                  class="rounded shadow img-fluid"
-                  style="width: auto; height: 77vh"
-                  :src="activeKeep.img"
-                  alt=""
-                />
-              </div>
-              <div class="col-6 border-start border-lg border-gray">
-                <div class="row p-0 justify-content-center">
-                  <div class="col-3 text-center">
-                    <i class="mdi text-center mdi-eye text-primary"
-                      ><b class="text-center ms-1">{{ activeKeep.views }}</b></i
-                    >
-                  </div>
-                  <div class="col-3 d-flex text-center align-items-start">
-                    <span
-                      class="
-                        d-flex
-                        container
-                        rounded
-                        justify-content-center
-                        align-items-center
-                      "
-                    >
-                      <img
-                        class="rounded"
-                        style="height: 2vh"
-                        src="src\assets\img\keepr-logo.png"
-                      /><b class="text-primary">
-                        <em class="text-center ms-1">{{ activeKeep.kept }}</em>
-                      </b>
-                    </span>
-                  </div>
-                </div>
-                <div>
-                  <div class="row justify-content-center">
-                    <h2 class="mt-4 fs-1 col-12 text-center">
-                      {{ activeKeep.name }}
-                    </h2>
-                    <p class="col-12 px-5 fs-5">
-                      {{ activeKeep.description }}
-                    </p>
-                    <div
-                      class="border-bottom border-dark border-lg mt-5 col-6"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </template>
-      </Modal>
-    </div>
     <div class="masonry-columns mt-2 p-2">
       <div
         v-for="k in keeps"
@@ -68,6 +9,66 @@
         <KeepCard :keep="k" />
       </div>
     </div>
+    <Modal id="myModal">
+      <template #body>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-6 d-flex justify-content-center">
+              <img
+                class="rounded shadow img-fluid object-fit"
+                style="width: auto; height: 77vh"
+                :src="activeKeep.img"
+                alt=""
+              />
+            </div>
+            <div class="col-6 border-start border-lg border-gray">
+              <div class="row p-0 justify-content-center">
+                <div class="col-3 text-center">
+                  <i class="mdi text-center mdi-eye text-primary"
+                    ><b class="text-center ms-1">{{ activeKeep.views }}</b></i
+                  >
+                </div>
+                <div class="col-3 d-flex text-center align-items-start">
+                  <span
+                    class="
+                      d-flex
+                      container
+                      rounded
+                      justify-content-center
+                      align-items-center
+                    "
+                  >
+                    <img
+                      class="rounded object-fit img-fluid"
+                      style="height: 2vh; min-width: 2vh"
+                      src="src\assets\img\keepr-logo.png"
+                    /><b class="text-primary">
+                      <em class="text-center ms-1">{{ activeKeep.kept }}</em>
+                    </b>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div class="row justify-content-center">
+                  <h2 class="mt-4 fs-1 col-12 text-center">
+                    {{ activeKeep.name }}
+                  </h2>
+                  <p class="col-12 px-5 fs-5">
+                    {{ activeKeep.description }}
+                  </p>
+                  <div
+                    class="border-bottom border-dark border-lg mt-5 col-6"
+                  ></div>
+                </div>
+              </div>
+              <div class="row">
+                <button class="col-3"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </Modal>
   </div>
 </template>
 
@@ -114,9 +115,5 @@ export default {
     display: inline-block;
     width: 99%;
   }
-}
-div,
-img {
-  overflow-x: hidden;
 }
 </style>

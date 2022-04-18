@@ -20,20 +20,23 @@ namespace Keepr.Services
       return _vr.CreateVault(vaultData);
     }
 
-    internal Vault GetVaultById(int id)
+    internal Vault GetVaultById(int id, string? userId)
     {
       Vault found = _vr.GetVaultById(id);
-      //TODO write a check for private vaults
       if (found == null)
       {
         throw new Exception("No Vault by that id");
       }
+      if (found.IsPrivate == true && userId != found.CreatorId)
+      {
+        throw new Exception("This vault is private");
+      }
       return found;
     }
 
-    internal Vault UpdateVault(Vault updateData)
+    internal Vault UpdateVault(Vault updateData, string userId)
     {
-      Vault original = GetVaultById(updateData.Id);
+      Vault original = GetVaultById(updateData.Id, userId);
       if (updateData.CreatorId != original.CreatorId)
       {
         throw new Exception("Not your vault to edit");
@@ -55,10 +58,10 @@ namespace Keepr.Services
       return _vr.RemoveVault(id);
     }
 
-    internal List<KeepVM> GetAllKV(int id)
+    internal List<KeepVM> GetAllKV(int id, string? userId)
     {
-      Vault found = this.GetVaultById(id);
-      if (found.IsPrivate == true)
+      Vault found = this.GetVaultById(id, userId);
+      if (found.IsPrivate == true && userId != found.CreatorId)
       {
         throw new Exception("This vault is private");
       }

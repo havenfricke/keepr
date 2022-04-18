@@ -18,7 +18,7 @@ namespace Keepr.Services
 
     internal VaultKeep CreateKV(VaultKeep data, string userId)
     {
-      Vault found = _vs.GetVaultById(data.VaultId);
+      Vault found = _vs.GetVaultById(data.VaultId, userId);
       if (found.CreatorId != userId)
       {
         throw new Exception("Not your vault");

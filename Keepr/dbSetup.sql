@@ -117,3 +117,22 @@ SET
   kept = kept + 1;
 WHERE
   id = 75;
+SELECT
+  kv.*,
+  kv.id AS vaultkeepId,
+  k.*,
+  a.*,
+  v.*
+FROM
+  vaultkeeps kv
+  JOIN keeps k ON k.id = kv.keepId
+  JOIN accounts a ON k.creatorId = a.id
+  JOIN vaults v ON kv.VaultId = v.id
+WHERE
+  kv.vaultId = 57;
+SELECT
+  *
+FROM
+  vaultkeeps
+WHERE
+  id = 21;

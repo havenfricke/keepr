@@ -16,11 +16,11 @@ namespace Keepr.Models
     public string CreatorId { get; set; }
     public Profile Creator { get; set; }
 
-
   }
 
   public class KeepVM : Keep
   {
     public int? VaultKeepId { get; set; }
+    public int? VaultId { get; set; }
   }
 }

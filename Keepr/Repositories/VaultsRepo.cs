@@ -90,18 +90,21 @@ namespace Keepr.Repositories
     internal List<KeepVM> GetKeepsByVaultId(int vaultId)
     {
       string sql = @"
-       SELECT
-        kv.*,
-        kv.vaultId AS VaultKeepId,
-        k.*,
-        a.*
-       FROM vaultkeeps kv
-       JOIN keeps k ON k.id = kv.keepId
-       JOIN accounts a ON k.creatorId = a.id
-       WHERE
-        kv.vaultId = @vaultId;
+      SELECT
+  kv.*,
+  kv.id AS vaultkeepId,
+  k.*,
+  a.*,
+  v.*
+FROM
+  vaultkeeps kv
+  JOIN keeps k ON k.id = kv.keepId
+  JOIN accounts a ON k.creatorId = a.id
+  JOIN vaults v ON kv.VaultId = v.id
+WHERE
+  kv.vaultId = @vaultId;
       ";
-      return _db.Query<KeepVM, Keep, Account, KeepVM>(sql, (kv, k, a) =>
+      return _db.Query<KeepVM, Keep, Account, Vault, KeepVM>(sql, (kv, k, a, v) =>
       {
         kv.Creator = a;
         kv.Name = k.Name;
@@ -109,6 +112,8 @@ namespace Keepr.Repositories
         kv.Views = k.Views;
         kv.Kept = k.Kept;
         kv.Description = k.Description;
+        kv.VaultId = v.Id;
+        kv.Id = k.Id;
         return kv;
       }, new { vaultId }).ToList();
     }

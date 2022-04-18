@@ -30,12 +30,9 @@
     >
       <span class="navbar-toggler-icon" />
     </button>
-    <div
-      class="collapse row navbar-collapse justify-content-end"
-      id="navbarText"
-    >
+    <div class="collapse navbar-collapse justify-content-end" id="navbarText">
       <!-- LOGIN COMPONENT HERE -->
-      <div class="col-2 bg-gray p-1 rounded shadow"><Login /></div>
+      <Login />
     </div>
   </nav>
 </template>
@@ -69,8 +66,5 @@ a:hover {
 .hoverable:active {
   transform: scale(0.98);
   transition: 50ms ease-in-out;
-}
-body {
-  overflow-x: hidden;
 }
 </style>
