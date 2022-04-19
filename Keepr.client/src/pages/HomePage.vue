@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid bg-warning">
     <div class="masonry-columns mt-0 p-2">
       <div
         v-for="k in keeps"

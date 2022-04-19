@@ -8,10 +8,12 @@
     alt=""
   />
   <h5
-    class="text-white p-0 my-0 ms-3 justify-content-around row"
+    class="text-white p-0 my-0 ms-3 justify-content-start row"
     style="transform: translateY(-4.5vh)"
   >
-    <b class="tshadow text-truncate px-1 mx-1 col-8">{{ keep.name }}</b>
+    <b class="tshadow text-truncate text-start px-1 mx-1 col-8">{{
+      keep.name
+    }}</b>
   </h5>
 </template>
 

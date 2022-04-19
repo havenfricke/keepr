@@ -1,22 +1,31 @@
 <template>
-  <div class="container-fluid">
-    <span class="row justify-content-center py-5 mx-3 mt-2 shadow bg-light">
+  <div class="container-fluid bg-warning">
+    <span class="row justify-content-center py-5 mx-3 mt-0 shadow bg-light">
       <img class="imgfix rounded img-fluid" :src="account.picture" alt="" />
       <div class="col-8 col-8-md col-12-sm">
         <div class="row justify-content-start text-truncate">
           <h1
-            style="font-size: 26pt"
+            style="font-size: 22pt"
             class="col-12 p-2 text-start text-truncate"
           >
             {{ account.name }}
           </h1>
-          <h4 class="col-12 text-start">Vaults: {{ vaultCount }}</h4>
-          <h4 class="col-12">Keeps: {{ userKeepCount }}</h4>
+          <h5 class="col-12 text-start">Vaults: {{ vaultCount }}</h5>
+          <h5 class="col-12">Keeps: {{ userKeepCount }}</h5>
         </div>
       </div>
     </span>
     <div class="row mt-5">
-      <h4 class="col-lg-2 col-md-4 col-sm-4 p-1 mx-3 border-bottom border-dark">
+      <h4
+        class="
+          col-lg-2 col-md-4
+          tshadow
+          col-sm-4
+          p-1
+          mx-3
+          border-bottom border-dark
+        "
+      >
         My Vaults
         <b
           ><i
@@ -31,26 +40,28 @@
               mdi mdi-plus
               text-primary
               hoverable2
+              tshadow
+              fs-4
             "
           >
           </i
         ></b>
       </h4>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex mx-5 justify-content-center">
       <div
         style="
-          height: 55vh;
+          height: 80vh;
           width: 98vw;
-          border: 1px solid #ccc;
+          border: 0.7px solid gray;
           overflow: auto;
         "
-        class="row mt-3"
+        class="row bg-light rounded mt-3 shadow"
       >
         <div
           v-for="v in myvaults"
           :key="v.id"
-          class="col-lg-3 col-md-6 col-sm-12 hoverable2 justify-content-center"
+          class="col-lg-2 col-md-3 col-sm-12 hoverable2 justify-content-center"
         >
           <VaultCard :vault="v" />
         </div>
@@ -64,6 +75,8 @@
           mx-3
           mb-3
           border-bottom border-dark
+          tshadow
+          fs-4
         "
       >
         My Keeps
@@ -80,6 +93,7 @@
               mdi mdi-plus
               text-primary
               hoverable2
+              tshadow
             "
           >
           </i
@@ -155,37 +169,60 @@
     <Modal id="createVaultModal">
       <template #title>Create A Vault!</template>
       <template #body>
-        <div class="row d-flex mx-2 align-items-center">
-          <input
-            class="col-12 rounded my-2 p-1"
-            type="text"
-            placeholder="Title..."
-          />
-          <input
-            class="col-12 rounded my-2 p-1"
-            type="text"
-            placeholder="Cover Image link..."
-          />
+        <form @submit.prevent="">
+          <div class="row d-flex mx-2 align-items-center">
+            <input
+              class="col-12 rounded my-2 p-1"
+              type="text"
+              placeholder="Title..."
+            />
+            <input
+              class="col-12 rounded my-2 p-1"
+              type="text"
+              placeholder="Cover Image link..."
+            />
 
-          <div class="row d-flex align-items-center justify-content-start">
-            <label class="switch col-4 mx-3 mt-2">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
+            <div class="row d-flex align-items-center justify-content-start">
+              <label class="switch col-4 mx-3 mt-2">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+              </label>
 
-            <span class="col-8 fs-6 align-bottom text-stsrt"
-              >Private Vault?</span
-            >
+              <span class="col-8 fs-6 align-bottom text-stsrt"
+                >Private Vault?</span
+              >
+            </div>
+            <div class="row d-flex justify-content-end">
+              <button class="col-4 btn btn-info text-white mt-4">Add</button>
+            </div>
           </div>
-          <div class="row d-flex justify-content-end">
-            <button class="col-4 btn btn-success mt-4">Add</button>
-          </div>
-        </div>
+        </form>
       </template>
     </Modal>
     <Modal id="createKeepModal">
-      <template #title></template>
-      <template #body></template>
+      <template #title>Create A Keep!</template>
+      <template #body>
+        <input
+          class="col-12 rounded my-2 p-1"
+          type="text"
+          placeholder="Title..."
+        />
+        <input
+          class="col-12 rounded my-2 p-1"
+          type="text"
+          placeholder="Cover Image link..."
+        />
+        <textarea
+          class="col-12 rounded my-2 p-1"
+          type="text"
+          placeholder="Description..."
+          cols="30"
+          rows="6"
+        />
+        <div class="row d-flex justify-content-end">
+          <button class="col-4 btn btn-success mt-4 mx-3">Add</button>
+        </div>
+      </template>
     </Modal>
   </div>
 </template>
@@ -329,5 +366,8 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+.tshadow {
+  text-shadow: rgba(0, 0, 0, 0.204) 1px 2px 6px;
 }
 </style>

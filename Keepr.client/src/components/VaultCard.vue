@@ -1,13 +1,13 @@
 <template>
-  <a @click="goTo('VaultPage')">
+  <a @click="goTo('VaultPage')" class="row justify-content-center">
     <img
       class="img-fluid object-fit lockshadow"
       src="src\assets\img\1200px-Orange_lock.svg.png"
       alt=""
     />
     <h5
-      style="transform: translateY(-7vh)"
-      class="text-center text-truncate text-white"
+      style="transform: translateY(-12vh)"
+      class="text-center col-7 text-clip text-white"
     >
       {{ vault.name }}
     </h5>
