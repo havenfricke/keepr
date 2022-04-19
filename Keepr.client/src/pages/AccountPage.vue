@@ -16,7 +16,7 @@
       </div>
     </span>
     <div class="row mt-5">
-      <h4 class="col-4 p-1 mx-3 border-bottom border-dark">
+      <h4 class="col-lg-2 col-md-4 col-sm-4 p-1 mx-3 border-bottom border-dark">
         My Vaults
         <b
           ><i
@@ -57,14 +57,22 @@
       </div>
     </div>
     <div class="row mt-5">
-      <h4 class="col-4 p-1 mx-3 mb-3 border-bottom border-dark">
+      <h4
+        class="
+          col-lg-2 col-md-4 col-sm-4
+          p-1
+          mx-3
+          mb-3
+          border-bottom border-dark
+        "
+      >
         My Keeps
         <b
           ><i
             style="font-size: 16pt"
             data-bs-target="#createKeepModal"
             data-bs-toggle="modal"
-            title="Add a Vault"
+            title="Add a Keep"
             class="
               text-bottom
               px-1

@@ -1,7 +1,7 @@
 <template>
   <a @click="goTo('VaultPage')">
     <img
-      class="img-fluid object-fit"
+      class="img-fluid object-fit lockshadow"
       src="src\assets\img\1200px-Orange_lock.svg.png"
       alt=""
     />
@@ -40,5 +40,8 @@ export default {
 <style scoped>
 img {
   overflow-x: hidden;
+}
+.lockshadow {
+  filter: drop-shadow(5px 10px 4px #00000032);
 }
 </style>
