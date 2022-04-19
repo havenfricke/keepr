@@ -23,6 +23,7 @@
 
 <script>
 import { AppState } from "../AppState"
+import { accountService } from "../services/AccountService"
 import { keepsService } from "../services/KeepsService"
 import { logger } from "../utils/Logger"
 export default {

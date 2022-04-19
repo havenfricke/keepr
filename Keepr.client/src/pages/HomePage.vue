@@ -81,7 +81,7 @@
         <p>Please select the vault you would like add to.</p>
         <form @submit.prevent="createKV">
           <div class="row justify-content-center">
-            <select class="col-10" name="" id="">
+            <select v-model="kvBody" class="col-10" name="" id="">
               <option v-for="v in vaults" :key="v.id" :value="v.id">
                 {{ v.name }}
               </option>
@@ -101,27 +101,29 @@
 </template>
 
 <script>
-import { computed } from "@vue/reactivity"
+import { computed, ref } from "@vue/reactivity"
 import { watchEffect } from "@vue/runtime-core"
 import { logger } from "../utils/Logger"
 import { keepsService } from "../services/KeepsService"
 import { AppState } from "../AppState"
 import { vaultsService } from "../services/VaultsService"
+import { accountService } from "../services/AccountService"
 export default {
   name: 'Home',
   setup() {
+    const kvBody = ref('');
     watchEffect(async () => {
       try {
         await keepsService.getAllKeeps()
-        await vaultsService.getMyVaults()
       } catch (error) {
         logger.error(error)
       }
     })
     return {
+      kvBody,
       async createKV() {
         try {
-          await vaultsService.createKV()
+          await vaultsService.createKV(kvBody.value)
         } catch (error) {
           logger.error(error)
         }

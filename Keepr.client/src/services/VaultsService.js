@@ -3,17 +3,13 @@ import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
 class VaultsService {
-  async getMyVaults(id) {
-    id = AppState.account.id
-    const res = await api.get('/api/profiles/' + id + '/vaults')
-    logger.log('getmyvaults', res.data)
-    AppState.vaults = res.data
-  }
 
-  async createKV() {
-    const res = await api.get('/api/vaults/' + id + '/keeps')
-    logger.log(res.data)
-    AppState.vaultkeeps = AppState.vaultkeeps.push(res.data)
+  async createKV(kvBody2) {
+    const kv = { keepId: AppState.activeKeep.id, vaultId: kvBody2 }
+    logger.log(kv)
+    const res = await api.post('/api/vaultkeeps', kv)
+    logger.log('createkv', res.data)
+    AppState.vaultkeeps = res.data
   }
 }
 
