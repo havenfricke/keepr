@@ -153,8 +153,35 @@
       </template>
     </Modal>
     <Modal id="createVaultModal">
-      <template #title></template>
-      <template #body></template>
+      <template #title>Create A Vault!</template>
+      <template #body>
+        <div class="row d-flex mx-2 align-items-center">
+          <input
+            class="col-12 rounded my-2 p-1"
+            type="text"
+            placeholder="Title..."
+          />
+          <input
+            class="col-12 rounded my-2 p-1"
+            type="text"
+            placeholder="Cover Image link..."
+          />
+
+          <div class="row d-flex align-items-center justify-content-start">
+            <label class="switch col-4 mx-3 mt-2">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+
+            <span class="col-8 fs-6 align-bottom text-stsrt"
+              >Private Vault?</span
+            >
+          </div>
+          <div class="row d-flex justify-content-end">
+            <button class="col-4 btn btn-success mt-4">Add</button>
+          </div>
+        </div>
+      </template>
     </Modal>
     <Modal id="createKeepModal">
       <template #title></template>
@@ -243,5 +270,64 @@ export default {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #ff7300;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #ff7300;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 </style>
