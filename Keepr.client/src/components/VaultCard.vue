@@ -6,8 +6,8 @@
       alt=""
     />
     <h5
-      style="transform: translateY(-12vh)"
-      class="text-center tshadow col-7 text-clip text-white"
+      style="transform: translateY(-10vh)"
+      class="text-center tshadow col-8 text-clip text-white"
     >
       {{ vault.name }}
     </h5>

@@ -61,7 +61,7 @@
         <div
           v-for="v in myvaults"
           :key="v.id"
-          class="col-lg-2 col-md-3 col-sm-12 hoverable2 justify-content-center"
+          class="col-lg-3 col-md-3 col-sm-12 hoverable2 justify-content-center"
         >
           <VaultCard :vault="v" />
         </div>
@@ -177,6 +177,8 @@
               class="col-12 rounded my-2 p-1"
               type="text"
               placeholder="Title..."
+              minlength="1"
+              maxlength="20"
             />
             <input
               required
@@ -193,6 +195,8 @@
               placeholder="Description..."
               cols="30"
               rows="6"
+              minlength="5"
+              maxlength="255"
             />
 
             <div class="row d-flex align-items-center justify-content-start">
@@ -213,7 +217,12 @@
               >
             </div>
             <div class="row d-flex justify-content-end">
-              <button class="col-4 btn btn-success text-white mt-4">Add</button>
+              <button
+                data-bs-dismiss="modal"
+                class="col-4 btn btn-success text-white mt-4"
+              >
+                Add
+              </button>
             </div>
           </div>
         </form>
@@ -229,6 +238,8 @@
             class="col-12 rounded my-2 p-1"
             type="text"
             placeholder="Title..."
+            minlength="1"
+            maxlength="20"
           />
           <input
             required
@@ -245,9 +256,14 @@
             placeholder="Description..."
             cols="30"
             rows="6"
+            minlength="5"
+            maxlength="255"
           />
           <div class="row d-flex justify-content-end">
-            <button class="col-4 btn btn-success text-white mt-4 mx-3">
+            <button
+              data-bs-dismiss="modal"
+              class="col-4 btn btn-success text-white mt-4 mx-3"
+            >
               Add
             </button>
           </div>
@@ -262,7 +278,6 @@ import { computed, ref, watchEffect } from 'vue'
 import { AppState } from '../AppState'
 import { logger } from "../utils/Logger"
 import { keepsService } from "../services/KeepsService"
-import { useRouter } from "vue-router"
 import { vaultsService } from "../services/VaultsService"
 
 

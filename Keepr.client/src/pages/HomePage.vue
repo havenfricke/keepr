@@ -50,10 +50,10 @@
               </div>
               <div>
                 <div class="row justify-content-center">
-                  <h2 class="mt-4 fs-1 col-12 text-center">
+                  <h2 class="mt-4 text-break fs-1 col-12 text-center">
                     {{ activeKeep.name }}
                   </h2>
-                  <p class="col-12 px-5 fs-6">
+                  <p class="col-12 text-break px-3 fs-6">
                     {{ activeKeep.description }}
                   </p>
                   <div
@@ -61,13 +61,33 @@
                   ></div>
                 </div>
               </div>
-              <div class="row mt-5 pt-5 mx-2">
+              <div class="row mt-3 pt-5 mx-2">
                 <button
                   data-bs-toggle="modal"
                   data-bs-target="#addKeepModal"
-                  class="col-6 text-white btn btn-primary shadow hoverable"
+                  class="
+                    col-6
+                    text-white text-break
+                    btn btn-primary
+                    shadow
+                    hoverable
+                  "
                 >
                   Add {{ activeKeep.name }} to Vault
+                </button>
+                <button
+                  @click="goTo('ProfilePage')"
+                  data-bs-dismiss="modal"
+                  class="
+                    col-6
+                    text-white
+                    btn btn-info
+                    shadow
+                    hoverable
+                    text-break
+                  "
+                >
+                  Visit Creator's Profile
                 </button>
               </div>
             </div>
@@ -110,9 +130,11 @@ import { keepsService } from "../services/KeepsService"
 import { AppState } from "../AppState"
 import { vaultsService } from "../services/VaultsService"
 import Pop from "../utils/Pop"
+import { useRouter } from "vue-router"
 export default {
   name: 'Home',
   setup() {
+    const router = useRouter();
     const kvBody = ref('');
     watchEffect(async () => {
       try {
@@ -122,6 +144,7 @@ export default {
       }
     })
     return {
+      router,
       kvBody,
       async createKV() {
         try {
@@ -131,6 +154,12 @@ export default {
         } catch (error) {
           logger.error(error)
         }
+      },
+      goTo(page) {
+        router.push({
+          name: page,
+          params: { id: AppState.activeKeep.creator.id }
+        })
       },
       keeps: computed(() => AppState.keeps),
       activeKeep: computed(() => AppState.activeKeep),
