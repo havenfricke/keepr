@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="masonry-columns mt-2 p-2">
+    <div class="masonry-columns mt-0 p-2">
       <div
         v-for="k in keeps"
         :key="k.id"
@@ -53,7 +53,7 @@
                   <h2 class="mt-4 fs-1 col-12 text-center">
                     {{ activeKeep.name }}
                   </h2>
-                  <p class="col-12 px-5 fs-5">
+                  <p class="col-12 px-5 fs-6">
                     {{ activeKeep.description }}
                   </p>
                   <div
@@ -61,12 +61,40 @@
                   ></div>
                 </div>
               </div>
-              <div class="row">
-                <button class="col-3"></button>
+              <div class="row mt-5 pt-5 mx-2">
+                <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#addKeepModal"
+                  class="col-6 text-white btn btn-primary shadow hoverable"
+                >
+                  Add {{ activeKeep.name }} to Vault
+                </button>
               </div>
             </div>
           </div>
         </div>
+      </template>
+    </Modal>
+    <Modal id="addKeepModal">
+      <template #title>Select Vault</template>
+      <template #body>
+        <p>Please select the vault you would like add to.</p>
+        <form @submit.prevent="createKV">
+          <div class="row justify-content-center">
+            <select class="col-10" name="" id="">
+              <option v-for="v in vaults" :key="v.id" :value="v.id">
+                {{ v.name }}
+              </option>
+            </select>
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#addKeepModal"
+              class="col-7 mt-3 text-white btn btn-primary shadow hoverable"
+            >
+              Add {{ activeKeep.name }} to Vault
+            </button>
+          </div>
+        </form>
       </template>
     </Modal>
   </div>
@@ -78,19 +106,29 @@ import { watchEffect } from "@vue/runtime-core"
 import { logger } from "../utils/Logger"
 import { keepsService } from "../services/KeepsService"
 import { AppState } from "../AppState"
+import { vaultsService } from "../services/VaultsService"
 export default {
   name: 'Home',
   setup() {
     watchEffect(async () => {
       try {
         await keepsService.getAllKeeps()
+        await vaultsService.getMyVaults()
       } catch (error) {
         logger.error(error)
       }
     })
     return {
+      async createKV() {
+        try {
+          await vaultsService.createKV()
+        } catch (error) {
+          logger.error(error)
+        }
+      },
       keeps: computed(() => AppState.keeps),
-      activeKeep: computed(() => AppState.activeKeep)
+      activeKeep: computed(() => AppState.activeKeep),
+      vaults: computed(() => AppState.vaults)
     }
 
   }

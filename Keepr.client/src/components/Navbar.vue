@@ -20,7 +20,7 @@
       </div>
     </router-link>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler bg-primary"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarText"
@@ -29,6 +29,7 @@
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon" />
+      <i class="mdi mdi-account"></i>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarText">
       <!-- LOGIN COMPONENT HERE -->

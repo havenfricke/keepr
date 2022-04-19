@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { AppState } from "../AppState"
 import { keepsService } from "../services/KeepsService"
 import { logger } from "../utils/Logger"
 export default {
@@ -35,6 +36,7 @@ export default {
     return {
       async getKeepById() {
         try {
+          AppState.activeKeep = {}
           await keepsService.getKeepById(props.keep.id)
         } catch (error) {
           logger.error(error)
@@ -45,7 +47,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 div,
 img {
   overflow-x: hidden;
