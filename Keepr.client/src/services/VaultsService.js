@@ -11,6 +11,7 @@ class VaultsService {
     logger.log('createkv', res.data)
     AppState.vaultkeeps = res.data
   }
+
 }
 
 export const vaultsService = new VaultsService()

@@ -78,11 +78,13 @@
     <Modal id="addKeepModal">
       <template #title>Select Vault</template>
       <template #body>
-        <p>Please select the vault you would like add to.</p>
+        <p class="text-center">
+          Please select the vault you would like add to.
+        </p>
         <form @submit.prevent="createKV">
           <div class="row justify-content-center">
-            <select v-model="kvBody" class="col-10" name="" id="">
-              <option v-for="v in vaults" :key="v.id" :value="v.id">
+            <select required v-model="kvBody" class="col-10" name="" id="">
+              <option v-for="v in myvaults" :key="v.id" :value="v.id">
                 {{ v.name }}
               </option>
             </select>
@@ -107,7 +109,7 @@ import { logger } from "../utils/Logger"
 import { keepsService } from "../services/KeepsService"
 import { AppState } from "../AppState"
 import { vaultsService } from "../services/VaultsService"
-import { accountService } from "../services/AccountService"
+import Pop from "../utils/Pop"
 export default {
   name: 'Home',
   setup() {
@@ -123,14 +125,16 @@ export default {
       kvBody,
       async createKV() {
         try {
-          await vaultsService.createKV(kvBody.value)
+          if (Pop.toast('Keep added to vault!', 'success', '1A2B3C')) {
+            await vaultsService.createKV(kvBody.value)
+          }
         } catch (error) {
           logger.error(error)
         }
       },
       keeps: computed(() => AppState.keeps),
       activeKeep: computed(() => AppState.activeKeep),
-      vaults: computed(() => AppState.vaults)
+      myvaults: computed(() => AppState.myvaults)
     }
 
   }
