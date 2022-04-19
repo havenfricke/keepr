@@ -1,7 +1,15 @@
 <template>
   <span class="navbar-text">
     <button
-      class="btn text-white text-center lighten-30 text-uppercase my-2 my-lg-0"
+      class="
+        btn
+        text-white
+        tshadow
+        text-center
+        lighten-30
+        text-uppercase
+        my-2 my-lg-0
+      "
       @click="login"
       v-if="!user.isAuthenticated"
     >
@@ -22,7 +30,9 @@
             height="40"
             class="rounded"
           />
-          <span class="mx-3 text-white lighten-30">{{ account.name }}</span>
+          <span class="mx-3 text-white tshadow lighten-30">{{
+            account.name
+          }}</span>
         </div>
       </div>
       <div
@@ -80,5 +90,8 @@ export default {
 }
 .hoverable {
   cursor: pointer;
+}
+.tshadow {
+  text-shadow: rgba(0, 0, 0, 0.204) 1px 2px 6px;
 }
 </style>

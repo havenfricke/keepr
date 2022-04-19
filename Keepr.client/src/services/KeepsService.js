@@ -23,5 +23,11 @@ class KeepsService {
     logger.log('getuserkeeps', res.data)
     AppState.profilekeeps = res.data
   }
+
+  async createKeep(keepData) {
+    const res = await api.post('/api/keeps/', keepData)
+    logger.log('createkeep', res.data)
+    AppState.profilekeeps = [...AppState.profilekeeps, res.data]
+  }
 }
 export const keepsService = new KeepsService()

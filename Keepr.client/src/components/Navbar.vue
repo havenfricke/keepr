@@ -2,6 +2,7 @@
   <nav class="navbar shadow navbar-expand-lg navbar-info bg-info px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div
+        title="Navigate to homepage"
         class="
           d-flex
           hoverable

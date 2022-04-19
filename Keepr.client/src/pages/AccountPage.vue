@@ -6,12 +6,12 @@
         <div class="row justify-content-start text-truncate">
           <h1
             style="font-size: 22pt"
-            class="col-12 p-2 text-start text-truncate"
+            class="col-12 tshadow p-2 text-start text-truncate"
           >
             {{ account.name }}
           </h1>
-          <h5 class="col-12 text-start">Vaults: {{ vaultCount }}</h5>
-          <h5 class="col-12">Keeps: {{ userKeepCount }}</h5>
+          <h5 class="col-12 tshadow text-start">Vaults: {{ vaultCount }}</h5>
+          <h5 class="col-12 tshadow">Keeps: {{ userKeepCount }}</h5>
         </div>
       </div>
     </span>
@@ -169,22 +169,42 @@
     <Modal id="createVaultModal">
       <template #title>Create A Vault!</template>
       <template #body>
-        <form @submit.prevent="">
+        <form @submit.prevent="createVault">
           <div class="row d-flex mx-2 align-items-center">
             <input
+              required
+              v-model="vaultData.name"
               class="col-12 rounded my-2 p-1"
               type="text"
               placeholder="Title..."
             />
             <input
+              required
+              v-model="vaultData.img"
               class="col-12 rounded my-2 p-1"
               type="text"
-              placeholder="Cover Image link..."
+              placeholder="Vault Image Link..."
+            />
+            <textarea
+              required
+              v-model="vaultData.description"
+              class="col-12 rounded my-2 p-1"
+              type="text"
+              placeholder="Description..."
+              cols="30"
+              rows="6"
             />
 
             <div class="row d-flex align-items-center justify-content-start">
-              <label class="switch col-4 mx-3 mt-2">
-                <input type="checkbox" />
+              <label
+                title="Set to private vault"
+                class="switch col-4 mx-3 mt-2"
+              >
+                <input
+                  title="Set to private vault"
+                  v-model="vaultData.isPrivate"
+                  type="checkbox"
+                />
                 <span class="slider round"></span>
               </label>
 
@@ -193,7 +213,7 @@
               >
             </div>
             <div class="row d-flex justify-content-end">
-              <button class="col-4 btn btn-info text-white mt-4">Add</button>
+              <button class="col-4 btn btn-success text-white mt-4">Add</button>
             </div>
           </div>
         </form>
@@ -202,44 +222,56 @@
     <Modal id="createKeepModal">
       <template #title>Create A Keep!</template>
       <template #body>
-        <input
-          class="col-12 rounded my-2 p-1"
-          type="text"
-          placeholder="Title..."
-        />
-        <input
-          class="col-12 rounded my-2 p-1"
-          type="text"
-          placeholder="Cover Image link..."
-        />
-        <textarea
-          class="col-12 rounded my-2 p-1"
-          type="text"
-          placeholder="Description..."
-          cols="30"
-          rows="6"
-        />
-        <div class="row d-flex justify-content-end">
-          <button class="col-4 btn btn-success mt-4 mx-3">Add</button>
-        </div>
+        <form @submit.prevent="createKeep">
+          <input
+            required
+            v-model="keepData.name"
+            class="col-12 rounded my-2 p-1"
+            type="text"
+            placeholder="Title..."
+          />
+          <input
+            required
+            v-model="keepData.img"
+            class="col-12 rounded my-2 p-1"
+            type="text"
+            placeholder="Cover Image link..."
+          />
+          <textarea
+            required
+            v-model="keepData.description"
+            class="col-12 rounded my-2 p-1"
+            type="text"
+            placeholder="Description..."
+            cols="30"
+            rows="6"
+          />
+          <div class="row d-flex justify-content-end">
+            <button class="col-4 btn btn-success text-white mt-4 mx-3">
+              Add
+            </button>
+          </div>
+        </form>
       </template>
     </Modal>
   </div>
 </template>
 
 <script>
-import { computed, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { AppState } from '../AppState'
 import { logger } from "../utils/Logger"
 import { keepsService } from "../services/KeepsService"
 import { useRouter } from "vue-router"
+import { vaultsService } from "../services/VaultsService"
 
 
 export default {
 
   name: 'Account',
   setup() {
-
+    const vaultData = ref({});
+    const keepData = ref({});
     watchEffect(async () => {
       try {
         await keepsService.getUserKeeps()
@@ -248,6 +280,23 @@ export default {
       }
     })
     return {
+      vaultData,
+      keepData,
+
+      async createVault() {
+        try {
+          await vaultsService.createVault(vaultData.value)
+        } catch (error) {
+          logger.error(error)
+        }
+      },
+      async createKeep() {
+        try {
+          await keepsService.createKeep(keepData.value)
+        } catch (error) {
+          logger.error(error)
+        }
+      },
       account: computed(() => AppState.account),
       myvaults: computed(() => AppState.myvaults),
       vaultCount: computed(() => AppState.myvaults.length),

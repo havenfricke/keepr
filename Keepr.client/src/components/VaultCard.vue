@@ -7,7 +7,7 @@
     />
     <h5
       style="transform: translateY(-12vh)"
-      class="text-center col-7 text-clip text-white"
+      class="text-center tshadow col-7 text-clip text-white"
     >
       {{ vault.name }}
     </h5>
@@ -43,5 +43,8 @@ img {
 }
 .lockshadow {
   filter: drop-shadow(5px 10px 4px #00000032);
+}
+.tshadow {
+  text-shadow: rgba(0, 0, 0, 0.204) 1px 2px 6px;
 }
 </style>
