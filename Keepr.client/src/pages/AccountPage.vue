@@ -15,6 +15,28 @@
         </div>
       </div>
     </span>
+    <div class="row mt-5">
+      <h4 class="col-4 p-1 mx-3 border-bottom border-dark">
+        My Vaults
+        <b
+          ><i
+            style="font-size: 16pt"
+            data-bs-target="#createVaultModal"
+            data-bs-toggle="modal"
+            title="Add a Vault"
+            class="
+              text-bottom
+              px-1
+              rounded
+              mdi mdi-plus
+              text-primary
+              hoverable2
+            "
+          >
+          </i
+        ></b>
+      </h4>
+    </div>
     <div class="d-flex justify-content-center">
       <div
         style="
@@ -23,16 +45,38 @@
           border: 1px solid #ccc;
           overflow: auto;
         "
-        class="row mt-5"
+        class="row mt-3"
       >
         <div
           v-for="v in myvaults"
           :key="v.id"
-          class="col-lg-3 col-md-6 col-sm-12 hoverable justify-content-center"
+          class="col-lg-3 col-md-6 col-sm-12 hoverable2 justify-content-center"
         >
           <VaultCard :vault="v" />
         </div>
       </div>
+    </div>
+    <div class="row mt-5">
+      <h4 class="col-4 p-1 mx-3 mb-3 border-bottom border-dark">
+        My Keeps
+        <b
+          ><i
+            style="font-size: 16pt"
+            data-bs-target="#createKeepModal"
+            data-bs-toggle="modal"
+            title="Add a Vault"
+            class="
+              text-bottom
+              px-1
+              rounded
+              mdi mdi-plus
+              text-primary
+              hoverable2
+            "
+          >
+          </i
+        ></b>
+      </h4>
     </div>
     <div class="masonry-columns mt-0 p-2">
       <div
@@ -100,6 +144,14 @@
         </div>
       </template>
     </Modal>
+    <Modal id="createVaultModal">
+      <template #title></template>
+      <template #body></template>
+    </Modal>
+    <Modal id="createKeepModal">
+      <template #title></template>
+      <template #body></template>
+    </Modal>
   </div>
 </template>
 
@@ -141,12 +193,22 @@ export default {
   height: auto;
 }
 .hoverable:hover {
-  transform: scale(1.001);
+  transform: scale(1.03);
   filter: drop-shadow(0px 15px 10px rgba(0, 0, 0, 0.3));
   transition: 125ms ease-in-out;
   cursor: pointer;
 }
 .hoverable:active {
+  transform: scale(0.98);
+  transition: 50ms ease-in-out;
+}
+.hoverable2:hover {
+  transform: scale(1.001);
+  filter: drop-shadow(0px 15px 10px rgba(0, 0, 0, 0.3));
+  transition: 125ms ease-in-out;
+  cursor: pointer;
+}
+.hoverable2:active {
   transform: scale(0.98);
   transition: 50ms ease-in-out;
 }
