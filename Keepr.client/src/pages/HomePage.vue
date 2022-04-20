@@ -156,6 +156,7 @@ export default {
         }
       },
       goTo(page) {
+
         router.push({
           name: page,
           params: { id: AppState.activeKeep.creator.id }

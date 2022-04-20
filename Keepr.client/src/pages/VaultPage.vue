@@ -236,7 +236,7 @@ export default {
       async removeKV() {
         if (await Pop.confirm(`Are you sure You want to remove ${this.activeKeep.name} from ${this.activeVault.name}?`, 'You might regret it', 'warning')) {
           try {
-            await keepsService.removeKV(this.vkId.vaultKeepId)
+            await keepsService.removeKV(this.activeKeep.id, this.vkId.vaultKeepId)
           } catch (error) {
             logger.error(error)
           }

@@ -16,6 +16,7 @@
 
 <script>
 import { useRouter } from "vue-router"
+import { AppState } from "../AppState";
 export default {
   props: {
     vault: {
@@ -27,6 +28,7 @@ export default {
     const router = useRouter();
     return {
       goTo(page) {
+        AppState.activeVault = {}
         router.push({
           name: page,
           params: { id: props.vault.id }

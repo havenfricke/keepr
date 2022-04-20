@@ -50,11 +50,11 @@ class KeepsService {
     AppState.profilekeeps = AppState.profilekeeps.filter(k => k.id != id)
   }
 
-  async removeKV(id) {
-    const res = await api.delete('/api/vaultkeeps/' + id)
+  async removeKV(id, vkid) {
+    const res = await api.delete('/api/vaultkeeps/' + vkid)
     logger.log('removeKV', res.data)
-    AppState.vaultkeeps = AppState.vaultkeeps.slice(vk => vk.id == id)
-    AppState.vaultkeeps = [...AppState.vaultkeeps, res.data]
+    AppState.vaultkeeps = AppState.vaultkeeps.filter(vk => vk.id != id)
+
   }
 }
 export const keepsService = new KeepsService()
