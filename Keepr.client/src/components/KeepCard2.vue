@@ -2,7 +2,7 @@
   <img
     @click="getKeepById"
     data-bs-toggle="modal"
-    data-bs-target="#myAccModal"
+    data-bs-target="#profileModal"
     class="img-fluid rounded shadow"
     :src="keep.img"
     alt=""
@@ -19,7 +19,7 @@
 
 <script>
 import { AppState } from "../AppState"
-import { accountService } from "../services/AccountService"
+
 import { keepsService } from "../services/KeepsService"
 import { logger } from "../utils/Logger"
 export default {
