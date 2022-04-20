@@ -2,7 +2,7 @@
   <header>
     <Navbar />
   </header>
-  <main>
+  <main class="bg-warning">
     <router-view />
   </main>
   <footer></footer>
