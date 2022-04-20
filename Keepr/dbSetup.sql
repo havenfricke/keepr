@@ -143,3 +143,9 @@ FROM
 WHERE
   creatorId = @id
   AND isPrivate != false;
+SELECT
+  *
+FROM
+  vaultkeeps
+WHERE
+  id = 20;
