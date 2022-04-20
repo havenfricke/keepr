@@ -5,7 +5,7 @@
       <i
         v-if="account.id == activeVault.creatorId"
         data-bs-toggle="modal"
-        data-bs-target="#editVaultModal"
+        data-bs-target="#editVaultModalv"
         title="Edit vault"
         class="mdi col-2 fs-3 hoverable mdi-cog"
       ></i>
@@ -137,7 +137,7 @@
         </form>
       </template>
     </Modal>
-    <Modal id="editVaultModal">
+    <Modal id="editVaultModalv">
       <template #title>Edit Vault</template>
       <template #body>
         <form @submit.prevent="editVault">
@@ -236,15 +236,15 @@ export default {
       async removeKV() {
         if (await Pop.confirm(`Are you sure You want to remove ${this.activeKeep.name} from ${this.activeVault.name}?`, 'You might regret it', 'warning')) {
           try {
-            keepsService.removeKV(this.activeKeep.id)
+            await keepsService.removeKV(this.vkId.vaultKeepId)
           } catch (error) {
             logger.error(error)
           }
         }
       },
-      async editvault() {
+      async editVault() {
         try {
-          await vaultsService.editVault(vaultData.value)
+          await vaultsService.editVault(vaultData.value, route.params.id)
         } catch (error) {
           logger.error(error)
         }
@@ -253,7 +253,8 @@ export default {
       activeVault: computed(() => AppState.activeVault),
       account: computed(() => AppState.account),
       activeKeep: computed(() => AppState.activeKeep),
-      myvaults: computed(() => AppState.myvaults)
+      myvaults: computed(() => AppState.myvaults),
+      vkId: computed(() => AppState.vaultkeeps.find(vk => AppState.activeKeep.id == vk.id))
     }
   }
 }

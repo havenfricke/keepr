@@ -43,5 +43,18 @@ class KeepsService {
     AppState.profilekeeps = AppState.profilekeeps.slice(k => k.id == id)
     AppState.profilekeeps = [...AppState.profilekeeps, res.data]
   }
+
+  async removeKeep(id) {
+    const res = api.delete('/api/keeps/' + id)
+    logger.log('removekeep', res.data)
+    AppState.profilekeeps = AppState.profilekeeps.filter(k => k.id != id)
+  }
+
+  async removeKV(id) {
+    const res = await api.delete('/api/vaultkeeps/' + id)
+    logger.log('removeKV', res.data)
+    AppState.vaultkeeps = AppState.vaultkeeps.slice(vk => vk.id == id)
+    AppState.vaultkeeps = [...AppState.vaultkeeps, res.data]
+  }
 }
 export const keepsService = new KeepsService()

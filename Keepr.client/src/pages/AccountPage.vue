@@ -384,7 +384,14 @@
             minlength="5"
             maxlength="255"
           />
-          <div class="row d-flex justify-content-end">
+          <div class="row d-flex justify-content-around">
+            <button
+              @click="removeKeep"
+              data-bs-dismiss="modal"
+              class="col-4 btn btn-danger text-white mt-4 mx-3"
+            >
+              Delete Keep
+            </button>
             <button
               data-bs-dismiss="modal"
               class="col-4 btn btn-success text-white mt-4 mx-3"
@@ -428,6 +435,7 @@ import { AppState } from '../AppState'
 import { logger } from "../utils/Logger"
 import { keepsService } from "../services/KeepsService"
 import { vaultsService } from "../services/VaultsService"
+import Pop from "../utils/Pop"
 
 
 export default {
@@ -466,6 +474,15 @@ export default {
           await keepsService.editKeep(keepData.value)
         } catch (error) {
           logger.error(error)
+        }
+      },
+      async removeKeep() {
+        if (await Pop.confirm(`Are you sure You want to permanently remove ${this.activeKeep.name}?`, 'You might regret it', 'warning')) {
+          try {
+            await keepsService.removeKeep(this.activeKeep.id)
+          } catch (error) {
+            logger.error(error)
+          }
         }
       },
       account: computed(() => AppState.account),

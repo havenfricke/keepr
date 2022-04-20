@@ -92,7 +92,7 @@ namespace Keepr.Repositories
       string sql = @"
       SELECT
   kv.*,
-  k.id AS vaultkeepId,
+  kv.id AS vaultkeepId,
   k.*,
   a.*,
   v.*
