@@ -29,5 +29,11 @@ class KeepsService {
     logger.log('createkeep', res.data)
     AppState.profilekeeps = [...AppState.profilekeeps, res.data]
   }
+
+  async getVaultKeeps(id) {
+    const res = await api.get('/api/vaults/' + id + '/keeps')
+    logger.log('getvaultkeeps', res.data)
+    AppState.vaultkeeps = res.data
+  }
 }
 export const keepsService = new KeepsService()

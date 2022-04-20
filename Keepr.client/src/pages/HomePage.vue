@@ -148,9 +148,9 @@ export default {
       kvBody,
       async createKV() {
         try {
-          if (Pop.toast('Keep added to vault!', 'success', '1A2B3C')) {
-            await vaultsService.createKV(kvBody.value)
-          }
+          const kv = { keepId: this.activeKeep.id, vaultId: kvBody.value }
+          await vaultsService.createKV(kv)
+          Pop.toast('Keep added to vault!', 'success', '1A2B3C')
         } catch (error) {
           logger.error(error)
         }
