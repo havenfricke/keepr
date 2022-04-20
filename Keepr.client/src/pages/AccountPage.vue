@@ -61,7 +61,7 @@
         <div
           v-for="v in myvaults"
           :key="v.id"
-          class="col-lg-3 col-md-3 col-sm-12 hoverable2 justify-content-center"
+          class="col-lg-2 col-md-3 col-sm-12 hoverable2 justify-content-center"
         >
           <VaultCard :vault="v" />
         </div>
@@ -106,7 +106,7 @@
         :key="k.id"
         class="col-12 rounded hoverable container"
       >
-        <KeepCard2 :keep="k" />
+        <KeepCard4 :keep="k" />
       </div>
     </div>
     <Modal id="myAccModal">
@@ -270,6 +270,155 @@
         </form>
       </template>
     </Modal>
+    <Modal id="accountKeepModal">
+      <template #body>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-6 d-flex justify-content-center">
+              <img
+                class="rounded shadow img-fluid object-fit"
+                style="width: auto; height: 77vh"
+                :src="activeKeep.img"
+                alt=""
+              />
+            </div>
+            <div class="col-6 border-start border-lg border-gray">
+              <div class="row p-0 justify-content-center">
+                <div class="col-3 text-center">
+                  <i class="mdi text-center mdi-eye text-primary"
+                    ><b class="text-center ms-1">{{ activeKeep.views }}</b></i
+                  >
+                </div>
+                <div class="col-3 d-flex text-center align-items-start">
+                  <span
+                    class="
+                      d-flex
+                      container
+                      rounded
+                      justify-content-center
+                      align-items-center
+                    "
+                  >
+                    <img
+                      class="rounded object-fit img-fluid"
+                      style="height: 2vh; min-width: 2vh"
+                      src="src\assets\img\keepr-logo.png"
+                    /><b class="text-primary">
+                      <em class="text-center ms-1">{{ activeKeep.kept }}</em>
+                    </b>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div class="row justify-content-center">
+                  <h2 class="mt-4 text-break fs-1 col-12 text-center">
+                    {{ activeKeep.name }}
+                  </h2>
+                  <p class="col-12 text-break px-3 fs-6">
+                    {{ activeKeep.description }}
+                  </p>
+                  <div
+                    class="border-bottom border-dark border-lg mt-5 col-6"
+                  ></div>
+                </div>
+              </div>
+              <div class="row mt-3 pt-5 mx-2">
+                <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#addKeepModal"
+                  class="
+                    col-6
+                    text-white text-break
+                    btn btn-primary
+                    shadow
+                    hoverable
+                  "
+                >
+                  Add {{ activeKeep.name }} to Vault
+                </button>
+                <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#editKeepModal"
+                  class="
+                    col-6
+                    text-white
+                    btn btn-info
+                    shadow
+                    hoverable
+                    text-break
+                  "
+                >
+                  Edit Keep
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </Modal>
+    <Modal id="editKeepModal">
+      <template #title>Edit Vault</template>
+      <template #body>
+        <form @submit.prevent="editKeep">
+          <input
+            v-model="keepData.name"
+            class="col-12 rounded my-2 p-1"
+            type="text"
+            placeholder="Title..."
+            minlength="1"
+            maxlength="20"
+          />
+          <input
+            v-model="keepData.img"
+            class="col-12 rounded my-2 p-1"
+            type="text"
+            placeholder="Cover Image link..."
+          />
+          <textarea
+            v-model="keepData.description"
+            class="col-12 rounded my-2 p-1"
+            type="text"
+            placeholder="Description..."
+            cols="30"
+            rows="6"
+            minlength="5"
+            maxlength="255"
+          />
+          <div class="row d-flex justify-content-end">
+            <button
+              data-bs-dismiss="modal"
+              class="col-4 btn btn-success text-white mt-4 mx-3"
+            >
+              Submit Changes
+            </button>
+          </div>
+        </form>
+      </template>
+    </Modal>
+    <Modal id="addKeepModal">
+      <template #title>Select Vault</template>
+      <template #body>
+        <p class="text-center">
+          Please select the vault you would like add to.
+        </p>
+        <form @submit.prevent="createKV">
+          <div class="row justify-content-center">
+            <select required v-model="kvBody" class="col-10">
+              <option v-for="v in myvaults" :key="v.id" :value="v.id">
+                {{ v.name }}
+              </option>
+            </select>
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#addKeepModal"
+              class="col-7 mt-3 text-white btn btn-primary shadow hoverable"
+            >
+              Add {{ activeKeep.name }} to Vault
+            </button>
+          </div>
+        </form>
+      </template>
+    </Modal>
   </div>
 </template>
 
@@ -308,6 +457,13 @@ export default {
       async createKeep() {
         try {
           await keepsService.createKeep(keepData.value)
+        } catch (error) {
+          logger.error(error)
+        }
+      },
+      async editKeep() {
+        try {
+          await keepsService.editKeep(keepData.value)
         } catch (error) {
           logger.error(error)
         }

@@ -46,7 +46,7 @@
         <div
           v-for="v in profilevaults"
           :key="v.id"
-          class="col-lg-3 col-md-3 col-sm-12 hoverable2 justify-content-center"
+          class="col-lg-2 col-md-3 col-sm-12 hoverable2 justify-content-center"
         >
           <VaultCard2 :vault="v" />
         </div>
@@ -55,7 +55,7 @@
     <div class="row mt-5">
       <h4
         class="
-          col-lg-2 col-md-4 col-sm-4
+          col-lg-3 col-md-4 col-sm-6
           p-1
           mx-3
           mb-3
