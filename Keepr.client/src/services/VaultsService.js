@@ -24,7 +24,7 @@ class VaultsService {
     AppState.activeVault = res.data
   }
 
-  async removeKV() {
+  async removeVault(id) {
     const res = await api.delete()
   }
 }
