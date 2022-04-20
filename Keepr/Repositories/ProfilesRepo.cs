@@ -49,7 +49,7 @@ namespace Keepr.Repositories
       FROM
       vaults
       WHERE
-      creatorId = @id AND isPrivate != true;
+      creatorId = @id;
       ";
       return _db.Query<Vault>(sql, new { id }).ToList();
     }

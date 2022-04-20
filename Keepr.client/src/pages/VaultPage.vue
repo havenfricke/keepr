@@ -201,7 +201,7 @@
 
 <script>
 import { computed, ref, watchEffect } from "@vue/runtime-core"
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { keepsService } from "../services/KeepsService";
 import { logger } from "../utils/Logger";
 import { AppState } from "../AppState";
@@ -211,6 +211,7 @@ export default {
   name: 'VaultPage',
   setup() {
     const route = useRoute();
+    const router = useRouter();
     const vaultData = ref({});
     if (route.params.id) {
       watchEffect(async () => {
@@ -224,10 +225,14 @@ export default {
     }
     return {
       vaultData,
+      router,
       async removeVault() {
         if (await Pop.confirm(`Are you sure You want to Delete ${this.activeVault.name}?`, 'You might regret it', 'warning')) {
           try {
             vaultsService.removeVault(route.params.id)
+            router.push({
+              name: 'Account'
+            })
           } catch (error) {
             logger.error(error)
           }

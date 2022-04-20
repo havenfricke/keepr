@@ -1,5 +1,5 @@
 <template>
-  <a @click="goTo('VaultPage')" class="row justify-content-center">
+  <a @click="goTo('VaultPage', 'Home')" class="row justify-content-center">
     <img
       class="img-fluid object-fit lockshadow"
       src="src\assets\img\1200px-Orange_lock.svg.png"
@@ -27,12 +27,18 @@ export default {
   setup(props) {
     const router = useRouter();
     return {
-      goTo(page) {
-        AppState.activeVault = {}
-        router.push({
-          name: page,
-          params: { id: props.vault.id }
-        })
+      goTo(page, page2) {
+        if (props.vault.isPrivate == true) {
+          router.push({
+            name: page2
+          })
+        } else {
+          AppState.activeVault = {}
+          router.push({
+            name: page,
+            params: { id: props.vault.id }
+          });
+        }
       }
     }
   }
