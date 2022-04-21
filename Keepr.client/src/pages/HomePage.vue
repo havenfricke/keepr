@@ -61,7 +61,10 @@
                   ></div>
                 </div>
               </div>
-              <div class="row mt-3 pt-5 mx-2">
+              <div
+                style="transform: translateY(33vh)"
+                class="row mt-3 pt-5 mx-2"
+              >
                 <button
                   v-if="account"
                   data-bs-toggle="modal"
@@ -187,7 +190,7 @@ export default {
 .masonry-columns {
   columns: 5 200px;
   column-gap: 0.1vw;
-  img {
+  div {
     display: inline-block;
     width: 99%;
   }

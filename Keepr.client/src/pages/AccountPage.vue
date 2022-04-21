@@ -322,7 +322,10 @@
                   ></div>
                 </div>
               </div>
-              <div class="row mt-3 pt-5 mx-2">
+              <div
+                style="transform: translateY(33vh)"
+                class="row mt-3 pt-5 mx-2"
+              >
                 <button
                   data-bs-toggle="modal"
                   data-bs-target="#addKeepModal"
