@@ -37,7 +37,6 @@ class VaultsService {
     logger.log('removevault', res.data)
     AppState.myvaults = AppState.myvaults.filter(v => v.id != id)
     AppState.activeVault = {}
-
   }
 }
 

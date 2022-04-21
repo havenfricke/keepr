@@ -63,6 +63,7 @@
               </div>
               <div class="row mt-3 pt-5 mx-2">
                 <button
+                  v-if="account"
                   data-bs-toggle="modal"
                   data-bs-target="#addKeepModal"
                   class="
@@ -164,7 +165,8 @@ export default {
       },
       keeps: computed(() => AppState.keeps),
       activeKeep: computed(() => AppState.activeKeep),
-      myvaults: computed(() => AppState.myvaults)
+      myvaults: computed(() => AppState.myvaults),
+      account: computed(() => AppState.account.id)
     }
 
   }

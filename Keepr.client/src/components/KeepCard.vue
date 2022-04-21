@@ -1,24 +1,26 @@
 <template>
-  <img
-    @click="getKeepById"
-    data-bs-toggle="modal"
-    data-bs-target="#myModal"
-    class="img-fluid rounded shadow"
-    :src="keep.img"
-    alt=""
-  />
-  <h5
-    class="text-white p-0 my-0 ms-3 justify-content-around row"
-    style="transform: translateY(-4.5vh)"
-  >
-    <b class="tshadow text-truncate px-1 mx-1 col-7">{{ keep.name }}</b>
+  <div class="container-fluid">
     <img
-      style="width: 50px"
-      class="img-fluid object-fit me-2 col-2 rounded-circle"
-      :src="keep.creator.picture"
+      @click="getKeepById"
+      data-bs-toggle="modal"
+      data-bs-target="#myModal"
+      class="img-fluid rounded shadow"
+      :src="keep.img"
       alt=""
     />
-  </h5>
+    <h5
+      class="text-white p-0 my-0 ms-3 justify-content-around row"
+      style="transform: translateY(-4.5vh)"
+    >
+      <b class="tshadow text-truncate px-1 mx-1 col-7">{{ keep.name }}</b>
+      <img
+        style="width: 50px"
+        class="img-fluid object-fit me-2 col-2 rounded-circle"
+        :src="keep.creator.picture"
+        alt=""
+      />
+    </h5>
+  </div>
 </template>
 
 <script>

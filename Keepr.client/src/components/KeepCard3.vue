@@ -3,7 +3,7 @@
     @click="getKeepById"
     data-bs-toggle="modal"
     data-bs-target="#KVModal"
-    class="img-fluid rounded shadow"
+    class="img-fluid rounded shadow my-2"
     :src="keep.img"
     alt=""
   />
